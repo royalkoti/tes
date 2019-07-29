@@ -1,11 +1,12 @@
-variables: azureSubscription:2a124908-ff62-4ac7-b54a-f8d87033a1d0
-
-
+variables:
+  azureSubscription: Free Trial
 steps:
 
-- task: AzureWebApp
+- task: AzureWebApp@1
   displayName: Azure Web App Deploy
   inputs:
     azureSubscription: $(azureSubscription)
     appName: hdbwebapp
     package: $(System.DefaultWorkingDirectory)/**/*.zip
+apptyp: AzureWebApp
+
