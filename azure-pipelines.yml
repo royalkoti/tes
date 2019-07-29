@@ -1,20 +1,13 @@
-# Starter pipeline
-# Start with a minimal pipeline that you can customize to build and deploy your code.
-# Add steps that build, run tests, deploy, and more:
-# https://hdbwebapp.azurewebsites.net/
-
-trigger:
-- master
-
-pool:
-  vmImage: 'ubuntu-latest'
+variables:
+  azureSubscription: Contoso
+  # To ignore SSL error uncomment the below variable
+  # VSTS_ARM_REST_IGNORE_SSL_ERRORS: true
 
 steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
 
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://hdbwebapp.azurewebsites.net/
-  displayName: 'Run a multi-line script'
-  package: $(System.DefaultWorkingDirectory)/**/*.zip
+- task: AzureWebApp@1
+  displayName: Azure Web App Deploy
+  inputs:
+    azureSubscription: $(azureSubscription)
+    appName: hdbwebapp
+    package: $(System.DefaultWorkingDirectory)/**/*.zip
