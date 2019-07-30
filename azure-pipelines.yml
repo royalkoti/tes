@@ -7,7 +7,10 @@ steps:
   - task: ArchiveFiles@2
     displayName: "Archive files"
     inputs:
-      rootFolderOrFile: "$(System.DefaultWorkingDirectory)"
+      rootFolderOrFile: "- task: DotNetCoreCLI@2
+  inputs:
+    command: 'build'
+    projects: '$(System.DefaultWorkingDirectory)'
       includeRootFolder: false
       archiveFile: "$(System.DefaultWorkingDirectory)/$(Build.BuildId).zip"
   - task: PublishBuildArtifacts@1
